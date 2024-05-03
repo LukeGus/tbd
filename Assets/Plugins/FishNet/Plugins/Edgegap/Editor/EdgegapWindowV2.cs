@@ -63,7 +63,7 @@ namespace Edgegap.Editor
         private Button _appLoadExistingBtn;
         private TextField _appNameInput;
         /// <summary>`Sprite` type</summary>
-        [CanBeNull] private ObjectField _appIconSpriteObjInput;
+        private Sprite _appIconSpriteObjInput;
         private Button _appCreateBtn;
         private Label _appCreateResultLabel;
 
@@ -221,7 +221,6 @@ namespace Edgegap.Editor
             _appInfoFoldout = rootVisualElement.Q<Foldout>(EdgegapWindowMetadata.APP_INFO_FOLDOUT_ID);
             _appNameInput = rootVisualElement.Q<TextField>(EdgegapWindowMetadata.APP_NAME_TXT_ID);
             _appLoadExistingBtn = rootVisualElement.Q<Button>(EdgegapWindowMetadata.APP_LOAD_EXISTING_BTN_ID);
-            _appIconSpriteObjInput = rootVisualElement.Q<ObjectField>(EdgegapWindowMetadata.APP_ICON_SPRITE_OBJ_ID);
             _appCreateBtn = rootVisualElement.Q<Button>(EdgegapWindowMetadata.APP_CREATE_BTN_ID);
             _appCreateResultLabel = rootVisualElement.Q<Label>(EdgegapWindowMetadata.APP_CREATE_RESULT_LABEL_ID);
 
@@ -375,7 +374,6 @@ namespace Edgegap.Editor
             }
             catch (Exception e)
             {
-                Debug.LogError(e.Message);
                 _postAuthContainer.SetEnabled(false);
             }
         }
@@ -623,7 +621,7 @@ namespace Edgegap.Editor
         /// </summary>
         private void SyncObjectWithForm()
         {
-            if(_appIconSpriteObjInput.value != null) _appIconSpriteObj = _appIconSpriteObjInput.value as Sprite;
+            _appIconSpriteObj = _appIconSpriteObjInput as Sprite;
         }
 
         /// <summary>TODO: Load persistent data?</summary>
@@ -631,7 +629,7 @@ namespace Edgegap.Editor
         {
             // Only show the rest of the form if apiToken is verified
             _postAuthContainer.SetEnabled(_isApiTokenVerified);
-            if (_appIconSpriteObjInput.value != null) _appIconSpriteObjInput.value = _appIconSpriteObj;
+            _appIconSpriteObjInput = _appIconSpriteObj;
             _containerCustomRegistryWrapper.SetEnabled(_containerUseCustomRegistryToggle.value);
             _containerUseCustomRegistryToggle.value = _containerUseCustomRegistryToggle.value;
 
@@ -1060,7 +1058,7 @@ namespace Edgegap.Editor
             if (!string.IsNullOrEmpty(_loadedApp.Image))
             {
                 _appIconSpriteObj = getSpriteFromBase64Str(_loadedApp.Image);
-                _appIconSpriteObjInput.value = _appIconSpriteObj;
+                _appIconSpriteObjInput = _appIconSpriteObj;
             }
 
             // On fail, shake the "Add more game servers" btn // 400 == # of apps limit reached
