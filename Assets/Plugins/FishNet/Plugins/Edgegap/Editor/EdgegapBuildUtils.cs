@@ -86,22 +86,12 @@ namespace Edgegap
             string buildCommand = IsArmCPU() ? "buildx build --platform linux/amd64" : "build";
 
 #if UNITY_EDITOR_WIN
-            await RunCommand("docker.exe", $"{buildCommand} -t {registry}/{imageRepo}:{tag} .", onStatusUpdate,
-#elif UNITY_EDITOR_OSX
-            await RunCommand("/bin/bash", $"-c \"docker {buildCommand} -t {registry}/{imageRepo}:{tag} .\"", onStatusUpdate,
-#elif UNITY_EDITOR_LINUX
-            await RunCommand("/bin/bash", $"-c \"docker {buildCommand} -t {registry}/{imageRepo}:{tag} .\"", onStatusUpdate,
+            await RunCommand("docker.exe", $"{buildCommand} -t {registry}/{imageRepo}:{tag} .", onStatusUpdate);
+#elif UNITY_EDITOR_OSX || UNITY_EDITOR_LINUX
+            await RunCommand("/bin/bash", $"-c \"docker {buildCommand} -t {registry}/{imageRepo}:{tag} .\"", onStatusUpdate);
 #endif
-                (msg) =>
-                {
-                    if (msg.Contains("ERROR"))
-                    {
-                        realErrorMessage = msg;
-                    }
-                    onStatusUpdate(msg);
-                });
 
-            if(realErrorMessage != null)
+            if (realErrorMessage != null)
             {
                 throw new Exception(realErrorMessage);
             }
