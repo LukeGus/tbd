@@ -12,6 +12,7 @@ using Edgegap.Editor.Api;
 using Edgegap.Editor.Api.Models;
 using Edgegap.Editor.Api.Models.Requests;
 using Edgegap.Editor.Api.Models.Results;
+using JetBrains.Annotations;
 using UnityEditor;
 using UnityEditor.Build.Reporting;
 using UnityEditor.Search;
@@ -62,7 +63,7 @@ namespace Edgegap.Editor
         private Button _appLoadExistingBtn;
         private TextField _appNameInput;
         /// <summary>`Sprite` type</summary>
-        private UnityEditor.Search.ObjectField _appIconSpriteObjInput;
+        [CanBeNull] private ObjectField _appIconSpriteObjInput;
         private Button _appCreateBtn;
         private Label _appCreateResultLabel;
 
@@ -622,7 +623,7 @@ namespace Edgegap.Editor
         /// </summary>
         private void SyncObjectWithForm()
         {
-            _appIconSpriteObj = _appIconSpriteObjInput.value as Sprite;
+            if(_appIconSpriteObjInput.value != null) _appIconSpriteObj = _appIconSpriteObjInput.value as Sprite;
         }
 
         /// <summary>TODO: Load persistent data?</summary>
@@ -630,7 +631,7 @@ namespace Edgegap.Editor
         {
             // Only show the rest of the form if apiToken is verified
             _postAuthContainer.SetEnabled(_isApiTokenVerified);
-            _appIconSpriteObjInput.value = _appIconSpriteObj;
+            if (_appIconSpriteObjInput.value != null) _appIconSpriteObjInput.value = _appIconSpriteObj;
             _containerCustomRegistryWrapper.SetEnabled(_containerUseCustomRegistryToggle.value);
             _containerUseCustomRegistryToggle.value = _containerUseCustomRegistryToggle.value;
 
