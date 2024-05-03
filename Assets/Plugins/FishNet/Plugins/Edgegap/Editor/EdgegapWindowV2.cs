@@ -62,7 +62,7 @@ namespace Edgegap.Editor
         private Button _appLoadExistingBtn;
         private TextField _appNameInput;
         /// <summary>`Sprite` type</summary>
-        private ObjectField _appIconSpriteObjInput;
+        private UnityEditor.Search.ObjectField _appIconSpriteObjInput;
         private Button _appCreateBtn;
         private Label _appCreateResultLabel;
 

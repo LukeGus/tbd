@@ -1,3 +1,5 @@
+#if UNITY_EDITOR
+
 using UnityEngine;
 using Edgegap;
 using IO.Swagger.Model;
@@ -10,3 +12,5 @@ public class EdgegapToolScript : MonoBehaviour
 {
     public Status ServerStatus => EdgegapServerDataManager.GetServerStatus();
 }
+
+#endif

@@ -1,3 +1,5 @@
+#if UNITY_EDITOR
+
 using IO.Swagger.Model;
 using System.Collections.Generic;
 using System.Linq;
@@ -238,3 +240,5 @@ namespace Edgegap
         }
     }
 }
+
+#endif
