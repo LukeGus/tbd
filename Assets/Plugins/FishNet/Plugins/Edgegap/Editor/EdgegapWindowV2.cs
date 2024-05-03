@@ -1,3 +1,5 @@
+#if UNITY_EDITOR
+
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -12,7 +14,7 @@ using Edgegap.Editor.Api.Models.Requests;
 using Edgegap.Editor.Api.Models.Results;
 using UnityEditor;
 using UnityEditor.Build.Reporting;
-using UnityEditor.UIElements;
+using UnityEditor.Search;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.UIElements;
@@ -1739,3 +1741,5 @@ namespace Edgegap.Editor
         #endregion // Persistence Helpers
     }
 }
+
+#endif

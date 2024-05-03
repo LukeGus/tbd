@@ -1,7 +1,8 @@
-using UnityEditor;
+#if UNITY_EDITOR
+
 using UnityEngine;
 using UnityEngine.UIElements;
-using UnityEditor.UIElements;
+
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Collections.Generic;
@@ -15,7 +16,10 @@ using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using IO.Swagger.Model;
+
+using UnityEditor;
 using UnityEditor.Build.Reporting;
+
 using Application = UnityEngine.Application;
 
 namespace Edgegap
@@ -979,5 +983,6 @@ namespace Edgegap
             string data = EditorPrefs.GetString(EditorDataSerializationName, JsonUtility.ToJson(this, false));
             JsonUtility.FromJsonOverwrite(data, this);
         }
-    }
-}
+    }}
+
+#endif

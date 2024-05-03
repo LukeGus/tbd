@@ -1,4 +1,6 @@
-﻿using System;
+﻿#if UNITY_EDITOR
+
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -7,6 +9,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+
 using UnityEditor;
 using UnityEditor.Build.Reporting;
 
@@ -286,3 +289,5 @@ ENTRYPOINT [ ""/root/build/ServerBuild"", ""-batchmode"", ""-nographics""]
 
     }
 }
+
+#endif
